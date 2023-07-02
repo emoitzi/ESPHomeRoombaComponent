@@ -135,8 +135,8 @@ class RoombaComponent : public PollingComponent, public CustomMQTTDevice
             lastBatteryLevel = batteryLevel;
             lastState = state;
 
-            publish_json(this->stateTopic, [=](JsonObject &root) {
-                root["battery_level"] = parse_float(batteryLevel).value();
+            publish_json(this->stateTopic, [=](JsonObject root) {
+                root["battery_level"] = parse_number<float>(batteryLevel).value();
                 root["state"] = state;
                 root["fan_speed"] = "off";
             });
